@@ -1,5 +1,6 @@
 var goose;
 var goosePos = 10;
+var gooseposy = 300;
 
 function setup() {
   createCanvas(600, 400);
@@ -15,6 +16,10 @@ function draw() {
   if (keyIsDown(RIGHT_ARROW)) {
     goosePos = goosePos + 2.5;
   }
+  
+  if(keyIsDown(UP_ARROW)){
+    gooseposy+= 10
+  }
 
   frameRate(60);
   background("#69EEFF");
@@ -28,3 +33,4 @@ function draw() {
 
   //
 }
+
