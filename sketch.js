@@ -31,19 +31,18 @@ function draw() {
   noFill();
   //goose
   image(goose, goosePos, goosePosY, 75, 75);
-  
+
   // makes sure the goose don't get too high
-/*  if (goosePosY < 280) {
-      for (let i; i < 10; i = i + 10) {
-        goosePosY++;
-        console.log(goosePosY);
-      }
-    } */
+  if (goosePosY < 300) {
+    goosePosY = goosePosY + 0.8;
+  }
 }
 
 // The goose jumps higher than a kindergartener who had 1 grain of sugar
 function keyPressed() {
   if (keyCode === UP_ARROW) {
-    goosePosY = goosePosY - 20;
+    if (goosePosY > 282){
+      goosePosY = goosePosY - 20
+    }
   }
 }
