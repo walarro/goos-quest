@@ -1,10 +1,9 @@
-var goose;
 var goosePos = 10;
-let goosePosY = 300;
+let goosePosY = 340;
+var twX = 300;
 
 function setup() {
   createCanvas(600, 400);
-  goose = loadImage("goose.png");
 }
 
 function draw() {
@@ -21,28 +20,33 @@ function draw() {
   /* if(keyIsDown(UP_ARROW)){
     goosePosY = goosePosY + 10
   } */
-
+  // makes sure the goose don't get too high
+  if (goosePosY < 340) {
+    goosePosY = goosePosY + 0.8;
+  }
   frameRate(60);
   background("#69EEFF");
+  
   //floor
   noStroke();
   fill("#8BC34A");
   rect(0, 350, 600, 50);
   noFill();
-  //goose
-  image(goose, goosePos, goosePosY, 75, 75);
-
-  // makes sure the goose don't get too high
-  if (goosePosY < 300) {
-    goosePosY = goosePosY + 0.8;
-  }
+  
+  // trash warriors
+  fill("gray");
+  rect(twX, 320, 50, 50);
+  
+  // goose
+  fill("white");
+  rect(goosePos, goosePosY, 30, 30);
 }
 
 // The goose jumps higher than a kindergartener who had 1 grain of sugar
 function keyPressed() {
   if (keyCode === UP_ARROW) {
-    if (goosePosY > 282){
-      goosePosY = goosePosY - 20
+    if (goosePosY > 322) {
+      goosePosY = goosePosY - 20;
     }
   }
 }
