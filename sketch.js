@@ -31,7 +31,7 @@ function draw() {
     }
   }
 
-  if (knife > twX - 20 && knife < twX - 10) {
+  if (knife>twX-20 && knife<twX-10) {
     twX = "n/a";
     knife = "n/a";
   }
@@ -41,6 +41,10 @@ function draw() {
   if (goosePosY < 340) {
     goosePosY = goosePosY + 0.8;
   }
+  
+  // giving the trash legs
+  
+  // boring stuff that I don't care about but should
   frameRate(60);
   background("#69EEFF");
 
@@ -66,7 +70,13 @@ function draw() {
 function keyPressed() {
   if (keyCode === UP_ARROW) {
     if (goosePosY > 322) {
-      goosePosY = goosePosY - 20;
+      goosePosY = goosePosY - 30;
     }
+  }
+}
+
+function keyReleased(){
+  if (keyCode === 75){
+    knife = "n/a"
   }
 }
