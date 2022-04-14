@@ -16,10 +16,6 @@ function draw() {
     goosePos = goosePos + 2.5;
   }
 
-  // Moving the jump function down to line 44 for better functionality
-  /* if(keyIsDown(UP_ARROW)){
-    goosePosY = goosePosY + 10
-  } */
   // makes sure the goose don't get too high
   if (goosePosY < 340) {
     goosePosY = goosePosY + 0.8;
