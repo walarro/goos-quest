@@ -4,6 +4,9 @@ var twX = 300;
 var knife = 0;
 var knifeX = 0;
 var knifeY = 0;
+var gravity=0;
+var jumping=false;
+var jump=30;
 
 function setup() {
   createCanvas(600, 400);
@@ -64,19 +67,27 @@ function draw() {
 
   // goose
   rect(goosePos, goosePosY, 30, 30);
+  if(jumping==true){
+    if(goosePosY>340){
+      if(jump<1){
+        jump=30
+        jumping=false;        
+      }
+    }
+    goosePosY = goosePosY - jump;
+    jump=jump-2;      
+  }
 }
 
 // The goose jumps higher than a kindergartener who had 1 grain of sugar
 function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    if (goosePosY > 322) {
-      goosePosY = goosePosY - 30;
-    }
+  if (keyCode == UP_ARROW) {
+    jumping=true;
   }
 }
 
 function keyReleased(){
-  if (keyCode === 75){
+  if (keyCode == 75){
     knife = "n/a"
   }
 }
