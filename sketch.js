@@ -1,15 +1,18 @@
 var goosePos = 10;
 let goosePosY = 340;
 var twX = 300;
+var twY = 320;
+var twJump = true;
 var knife = 0;
 var knifeX = 0;
 var knifeY = 0;
 var gravity=0;
 var jumping=false;
-var jump=30;
+var jump=20;
 
 function setup() {
   createCanvas(600, 400);
+  frameRate(30)
 }
 
 function draw() {
@@ -26,7 +29,7 @@ function draw() {
   if (knife > 600) {
     knife = "n/a";
   }
-  if (keyIsDown(75)) {
+  if (keyIsDown(76)) {
     for (let i = 0; i < 2.5; i = i + 0.25) {
       knifeX = 40;
       knifeY = 10;
@@ -34,7 +37,7 @@ function draw() {
     }
   }
 
-  if (knife>twX-20 && knife<twX-10) {
+  if (knife > twX - 20 && knife < twX - 10) {
     twX = "n/a";
     knife = "n/a";
   }
@@ -44,9 +47,18 @@ function draw() {
   if (goosePosY < 340) {
     goosePosY = goosePosY + 0.8;
   }
-  
+
   // giving the trash legs
-  
+  twX = twX - 1;
+
+  // trash jump
+    if (twY > 322) {
+      twY = twY - 35;
+    }
+    if (twY < 340) {
+      twY = twY + 0.8;
+    }
+
   // boring stuff that I don't care about but should
   frameRate(60);
   background("#69EEFF");
@@ -59,18 +71,20 @@ function draw() {
 
   // trash warriors
   fill("rgb(46,45,45)");
-  rect(twX, 320, 50, 50);
+  rect(twX, twY, 50, 50);
 
   // violent flying objects
-  fill("white");
-  rect(knife + goosePos, 340, knifeX, knifeY);
+  fill("red");
+  rect(knife, goosePosY, knifeX, knifeY);
 
   // goose
+  fill("white");
   rect(goosePos, goosePosY, 30, 30);
-  if(jumping==true){
+  
+    if(jumping==true){
     if(goosePosY>340){
       if(jump<1){
-        jump=30
+        jump=20
         jumping=false;        
       }
     }
@@ -86,8 +100,8 @@ function keyPressed() {
   }
 }
 
-function keyReleased(){
-  if (keyCode == 75){
-    knife = "n/a"
+function keyReleased() {
+  if (keyCode == 76) {
+    knife = "n/a";
   }
 }
