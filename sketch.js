@@ -10,6 +10,7 @@ var gravity = 0;
 var jumping = false;
 var jump = 20;
 var healthBar = 100;
+var knifeLeft = 7
 
 function setup() {
   createCanvas(600, 400);
@@ -36,11 +37,15 @@ function draw() {
       knife = knife + 0.75;
     }
   }
+  if (knifeLeft === 0){
+    knife = "n/a"
+  }
 
   if (knife > twX - 20 && knife < twX - 10) {
     twX = 650;
     knife = goosePos;
     healthBar = healthBar + 25;
+    knifeLeft--
   }
 
   if (healthBar > 100) {
@@ -117,6 +122,6 @@ function keyPressed() {
 
 function keyReleased() {
   if (keyCode == 76) {
-    knife = "n/a";
+    knife = goosePos
   }
 } 
