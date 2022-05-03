@@ -1,7 +1,7 @@
 var goosePos = 10;
 let goosePosY = 340;
-var twX = 300;
-var twY = 320;
+var twX
+var twY = 320
 var twJump = true;
 var knife = 0;
 var knifeX = 0;
@@ -14,6 +14,7 @@ var knifeLeft = 7
 
 function setup() {
   createCanvas(600, 400);
+  twX = random(300,600)
 }
 
 function draw() {
@@ -42,12 +43,16 @@ function draw() {
   }
 
   if (knife > twX - 20 && knife < twX - 10) {
-    twX = 650;
+    twX = 650
     knife = goosePos;
     healthBar = healthBar + 25;
     knifeLeft--
   }
 
+  if (twX < 0){
+    twX = 650
+  }
+  
   if (healthBar > 100) {
     healthBar = 100;
   }
