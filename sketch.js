@@ -51,7 +51,7 @@ function draw() {
     knifeLeft--
   }
   if (throwing === false){
-    knife = goosePos
+    knife = -200
   }
 
   //resets the trash warrior
@@ -129,12 +129,14 @@ function draw() {
 function keyPressed() {
   if (keyCode == UP_ARROW) {
     jumping = true;
+  } if (keyCode == 76){
+    knife = goosePos
   }
 }
 
 function keyReleased() {
   if (keyCode == 76) {
-    knife = goosePos
+    knife = -200
     throwing = false
   }
 } 
