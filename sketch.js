@@ -11,6 +11,7 @@ var jumping = false;
 var jump = 20;
 var healthBar = 100;
 var knifeLeft = 7
+var throwing = false
 
 function setup() {
   createCanvas(600, 400);
@@ -33,6 +34,7 @@ function draw() {
   }
   if (keyIsDown(76)) {
     for (let i = 0; i < 2.5; i = i + 0.25) {
+      throwing = true
       knifeX = 40;
       knifeY = 10;
       knife = knife + 0.75;
@@ -48,11 +50,16 @@ function draw() {
     healthBar = healthBar + 25;
     knifeLeft--
   }
+  if (throwing === false){
+    knife = goosePos
+  }
 
+  //resets the trash warrior
   if (twX < 0){
     twX = 650
   }
   
+  //healthbar 
   if (healthBar > 100) {
     healthBar = 100;
   }
@@ -128,5 +135,6 @@ function keyPressed() {
 function keyReleased() {
   if (keyCode == 76) {
     knife = goosePos
+    throwing = false
   }
 } 
