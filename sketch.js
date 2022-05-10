@@ -1,21 +1,21 @@
 var goosePos = 10;
 let goosePosY = 340;
-var twX
-var twY = 320
+var twX = 580;
+var twY = 320;
 var twJump = true;
 var knife = 0;
-var knifeX = 0;
-var knifeY = 0;
+var knifeX = 40;
+var knifeY = 10;
 var gravity = 0;
 var jumping = false;
 var jump = 20;
 var healthBar = 100;
-var knifeLeft = 7
-var throwing = false
+var knifeLeft = 10;
+var throwing = false;
+var twRand
 
 function setup() {
   createCanvas(600, 400);
-  twX = random(300,600)
 }
 
 function draw() {
@@ -29,37 +29,35 @@ function draw() {
   }
 
   // Knife functionality
-  if (knife > 600) {
+  if (knife > 580) {
     knife = "n/a";
   }
   if (keyIsDown(76)) {
     for (let i = 0; i < 2.5; i = i + 0.25) {
-      throwing = true
-      knifeX = 40;
-      knifeY = 10;
+      throwing = true;
       knife = knife + 0.75;
     }
   }
-  if (knifeLeft === 0){
-    knife = "n/a"
+  if (knifeLeft === 0) {
+    knife = "n/a";
   }
 
   if (knife > twX - 20 && knife < twX - 10) {
-    twX = 650
+    twX = 700;
     knife = goosePos;
     healthBar = healthBar + 25;
-    knifeLeft--
+    knifeLeft--;
   }
-  if (throwing === false){
-    knife = -200
+  if (throwing === false) {
+    knife = -200;
   }
 
   //resets the trash warrior
-  if (twX < 0){
-    twX = 650
+  if (twX < 0) {
+    twX = 700;
   }
-  
-  //healthbar 
+
+  //healthbar
   if (healthBar > 100) {
     healthBar = 100;
   }
@@ -94,20 +92,25 @@ function draw() {
   fill("white");
   stroke("white");
   text(healthBar, 40, 40);
+
+  // knifes left
+  text(knifeLeft, 560, 40);
   noStroke();
 
   // trash warriors
-  fill("rgb(46,45,45)");
-  rect(twX, twY, 50, 50);
+   for (var i=0;i<=10;i++) {
+    fill("rgb(46,45,45)");
+    rect(twX, twY, 50, 50);
+}
 
   // violent flying objects
-  fill("red");
-  rect(knife, goosePosY, knifeX, knifeY);
+  fill("grey");
+  rect(knife, 345, knifeX, knifeY);
 
   // goose
   fill("white");
   rect(goosePos, goosePosY, 30, 30);
-
+  
   if (jumping == true) {
     if (goosePosY > 340) {
       if (jump < 1) {
@@ -129,14 +132,21 @@ function draw() {
 function keyPressed() {
   if (keyCode == UP_ARROW) {
     jumping = true;
-  } if (keyCode == 76){
-    knife = goosePos
+  }
+  if (keyCode == 76) {
+    if (knifeLeft > 0) {
+      knife = goosePos;
+    } else {
+      knife = "n/a";
+      knifeLeft = 0;
+    }
   }
 }
 
 function keyReleased() {
   if (keyCode == 76) {
-    knife = -200
-    throwing = false
+    knife = -200;
+    throwing = false;
+    knifeLeft--;
   }
-} 
+}
