@@ -2,14 +2,13 @@ var goosePos = 10;
 let goosePosY = 340;
 var twX = [580, 600, 300, 200, 350];
 var twY = 320;
-var twJump = true;
 var knife = 0;
 var knifeX = 40;
 var knifeY = 10;
 var gravity = 0;
 var jumping = false;
 var jump = 20;
-var healthBar = 100;
+var healthBar = 500;
 var knifeLeft = 10;
 var throwing = false;
 var twRand;
@@ -42,12 +41,6 @@ function draw() {
     knife = "n/a";
   }
 
-  if (knife > twX - 20 && knife < twX - 10) {
-    twX = 700;
-    knife = goosePos;
-    healthBar = healthBar + 25;
-    knifeLeft--;
-  }
   if (throwing === false) {
     knife = -200;
   }
@@ -55,8 +48,8 @@ function draw() {
   //resets the trash warrior
 
   //healthbar
-  if (healthBar > 100) {
-    healthBar = 100;
+  if (healthBar > 500) {
+    healthBar = 500;
   }
   // makes sure the goose don't get too high
 
@@ -85,21 +78,25 @@ function draw() {
 
   // trash warriors
   fill("rgb(46,45,45)");
-  for (var i = 0; i <= 10; i++) {
+  for (var i = 0; i <= 5; i++) {
+    //trash warrior functionality
     rect(twX[i], twY, 50, 50);
     if (twX[i] < 0) {
-      twX[i] = random(0,400);
+      twX[i] = 700;
     }
-  }
+    twX[i] = twX[i] - 1;
 
-  // giving the trash legs
-  twX = twX - 1;
-  // trash jump
-  if (twY > 322) {
-    twY = twY - 35;
-  }
-  if (twY < 340) {
-    twY = twY + 0.8;
+    //knife functionality
+    if (knife > twX[i] - 20 && knife < twX[i] - 10) {
+      twX[i] = random(600, 700);
+      knife = goosePos;
+      healthBar = healthBar + 25;
+      knifeLeft--;
+    }
+    // healthbar functionality
+    if (twX[i] < goosePos + 60 && twX[i] + 60 > goosePos) {
+      healthBar = healthBar - 1;
+    }
   }
   // violent flying objects
   fill("grey");
@@ -118,11 +115,6 @@ function draw() {
     }
     goosePosY = goosePosY - jump;
     jump = jump - 2;
-  }
-
-  // healthbar functionality
-  if (twX < goosePos + 60 && twX + 60 > goosePos) {
-    healthBar = healthBar - 1;
   }
 }
 
