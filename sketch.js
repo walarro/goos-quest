@@ -1,6 +1,6 @@
 var goosePos = 10;
 let goosePosY = 340;
-var twX = 580;
+var twX = [580, 600, 300, 200, 350];
 var twY = 320;
 var twJump = true;
 var knife = 0;
@@ -12,7 +12,7 @@ var jump = 20;
 var healthBar = 100;
 var knifeLeft = 10;
 var throwing = false;
-var twRand
+var twRand;
 
 function setup() {
   createCanvas(600, 400);
@@ -53,9 +53,6 @@ function draw() {
   }
 
   //resets the trash warrior
-  if (twX < 0) {
-    twX = 700;
-  }
 
   //healthbar
   if (healthBar > 100) {
@@ -65,17 +62,6 @@ function draw() {
 
   if (goosePosY < 340) {
     goosePosY = goosePosY + 0.8;
-  }
-
-  // giving the trash legs
-  twX = twX - 1;
-
-  // trash jump
-  if (twY > 322) {
-    twY = twY - 35;
-  }
-  if (twY < 340) {
-    twY = twY + 0.8;
   }
 
   // boring stuff that I don't care about but should
@@ -98,11 +84,23 @@ function draw() {
   noStroke();
 
   // trash warriors
-   for (var i=0;i<=10;i++) {
-    fill("rgb(46,45,45)");
-    rect(twX, twY, 50, 50);
-}
+  fill("rgb(46,45,45)");
+  for (var i = 0; i <= 10; i++) {
+    rect(twX[i], twY, 50, 50);
+    if (twX[i] < 0) {
+      twX[i] = random(0,400);
+    }
+  }
 
+  // giving the trash legs
+  twX = twX - 1;
+  // trash jump
+  if (twY > 322) {
+    twY = twY - 35;
+  }
+  if (twY < 340) {
+    twY = twY + 0.8;
+  }
   // violent flying objects
   fill("grey");
   rect(knife, 345, knifeX, knifeY);
@@ -110,7 +108,7 @@ function draw() {
   // goose
   fill("white");
   rect(goosePos, goosePosY, 30, 30);
-  
+
   if (jumping == true) {
     if (goosePosY > 340) {
       if (jump < 1) {
