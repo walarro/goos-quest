@@ -3,8 +3,6 @@ let goosePosY = 340;
 var twX = [580, 600, 300, 200, 350];
 var twY = 320;
 var knife = 0;
-var knifeX = 40;
-var knifeY = 10;
 var gravity = 0;
 var jumping = false;
 var jump = 20;
@@ -12,9 +10,14 @@ var healthBar = 500;
 var knifeLeft = 10;
 var throwing = false;
 var twRand;
+var goose
+var trash
+var sword
 
 function setup() {
   createCanvas(600, 400);
+  goose = loadImage("right.png")
+  trash = loadImage("trash.png")
 }
 
 function draw() {
@@ -80,7 +83,7 @@ function draw() {
   fill("rgb(46,45,45)");
   for (var i = 0; i <= 5; i++) {
     //trash warrior functionality
-    rect(twX[i], twY, 50, 50);
+    image(trash,twX[i], twY, 50, 50);
     if (twX[i] < 0) {
       twX[i] = 700;
     }
@@ -99,12 +102,12 @@ function draw() {
     }
   }
   // violent flying objects
-  fill("grey");
-  rect(knife, 345, knifeX, knifeY);
+  fill("green");
+  rect(knife, 345, 15, 15);
 
   // goose
   fill("white");
-  rect(goosePos, goosePosY, 30, 30);
+  image(goose,goosePos, goosePosY, 70, 40);
 
   if (jumping == true) {
     if (goosePosY > 340) {
