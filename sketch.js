@@ -1,26 +1,73 @@
+var play = true;
 var goosePos = 10;
 let goosePosY = 340;
-var twX = [580, 600, 300, 200, 350];
-var twY = 320;
+var twJump = true;
 var knife = 0;
 var gravity = 0;
 var jumping = false;
 var jump = 20;
-var healthBar = 500;
 var knifeLeft = 10;
 var throwing = false;
 var twRand;
-var goose
-var trash
-var sword
+var storyfont;
+var scroll;
+var next=0;
+var startingscreen;
+var playbutton;
+var goose;
+var trash;
+var sword;
+var twX = [580, 600, 300, 200, 350];
+var twY = 320;
+var healthBar = 500;
+var twRand;
 
-function setup() {
-  createCanvas(600, 400);
+
+function preload(){
+  storyfont = loadFont("Ancient Medium.ttf");
+  scroll = loadImage("scroll.png");
   goose = loadImage("right.png")
   trash = loadImage("trash.png")
 }
 
-function draw() {
+function setup() {
+  startingscreen = loadImage("Starting screen.png");
+  playbutton = loadImage("Screen Shot 2022-05-23 at 10.40.53 AM.png");
+  createCanvas(600, 400);
+}
+
+function draw() { 
+
+  image(startingscreen, 0,0,650,400);
+  if(play==true){
+    image(playbutton, 220,300,150,60);     
+  }
+  if(play==false){
+    image(scroll,20,20,530,330);
+    textFont(storyfont);
+    stroke("black");
+    textSize(40)
+    if(next==0||next==1||next==2)
+    text("A long time ago there was...",90,110);
+    if(next==1||next==2){
+      text("A goose",90,150);   
+    }
+    if(next==2){
+      text("One day it was minding it's",90,190);
+      text("own business",90,240);
+    }
+    if(next==3){
+      text("And it was goosenaped",90,110);
+    }
+    if(next==4){
+      game();
+    }
+  }
+  
+}
+function game(){
+  textFont(storyfont);
+  stroke("black");
   // Controls Goose Position
   if (keyIsDown(LEFT_ARROW)) {
     goosePos = goosePos - 2.5;
@@ -120,7 +167,6 @@ function draw() {
     jump = jump - 2;
   }
 }
-
 // The goose jumps higher than a kindergartener who had 1 grain of sugar
 function keyPressed() {
   if (keyCode == UP_ARROW) {
@@ -134,6 +180,11 @@ function keyPressed() {
       knifeLeft = 0;
     }
   }
+  if(key == " "){
+    if(next<4){
+      next=next+1;      
+    }
+  }
 }
 
 function keyReleased() {
@@ -142,4 +193,9 @@ function keyReleased() {
     throwing = false;
     knifeLeft--;
   }
+}
+function mouseClicked(){
+  if (play == true && mouseX > 220 && mouseX < 370 && mouseY > 300 && mouseY < 360){
+    play = false;
+  } 
 }
