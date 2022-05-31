@@ -32,6 +32,7 @@ var grass;
 var grassPos;
 var grass2;
 var grass2Pos;
+var thealth;
 
 function preload() {
   storyfont = loadFont("Ancient Medium.ttf");
@@ -45,6 +46,7 @@ function preload() {
   grassPos = [random(0, 100), random(200, 400), random(500, 600)];
   grass2 = loadImage("grass2.png");
   grass2Pos = 50;
+  thealth = loadImage("thealth6.png");
 }
 
 function setup() {
@@ -199,9 +201,6 @@ function game() {
   if (healthBar < 20 && healthBar > 10) {
     healthGraph = loadImage("health/1.png");
   }
-  if (healthBar < 10 && healthBar > 0) {
-    healthGraph = loadImage("health/0.png");
-  }
   if (healthBar == 0) {
     healthGraph = loadImage("health/dead.png");
     next = 15;
@@ -257,6 +256,25 @@ function game() {
     // healthbar functionality
     if (bossX < goosePos + 60 && bossX + 60 > goosePos) {
       healthBar = healthBar - 2;
+    }
+    image(thealth, 460, 40, 100, 37.5);
+    if(bossKilled < 30 && bossKilled > 25){
+      thealth = loadImage("thealth1.png")
+    }
+    if(bossKilled < 25 && bossKilled > 20){
+      thealth = loadImage("thealth2.png")
+    }
+    if(bossKilled < 20 && bossKilled > 15){
+      thealth = loadImage("thealth3.png")
+    }
+    if(bossKilled < 15 && bossKilled > 10){
+      thealth = loadImage("thealth4.png")
+    }
+    if(bossKilled < 10 && bossKilled > 5){
+      thealth = loadImage("thealth5.png")
+    }
+    if(bossKilled < 5 && bossKilled > 0){
+      thealth = loadImage("thealth6.png")
     }
     if (bossKilled > 30) {
       bossX = 0;
